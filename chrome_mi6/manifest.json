@@ -1,0 +1,15 @@
+{  
+    "name": "抢解",  
+    "version": "1.0",  
+    "manifest_version": 2,  
+    "description": "first",  
+    "browser_action": {  
+        "default_icon": "./anchor.png" 
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://item.mi.com/*","http://static.mi.com/*","http://order.mi.com/*"],
+            "js": ["buy.js"]
+        }
+    ]
+}  
