@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			padding: 10px;
+		}
+		ul li{
+			list-style-type: none;
+			width: 20px;
+			background-color: red;
+			color: white;
+			text-align: center;
+			line-height: 40px;
+			font-weight: bold;
+			display: inline-block;
+			/*vertical-align: bottom;*/
+			margin: 2px;
+		}
+	</style>
+	<body>
+		<input type="number" name="num" id="num" value="" max="100" min="10"/>
+		<button id="unShift">左侧入</button>
+		<button id="push">右侧入</button>
+		<button id="shift">左侧出</button>
+		<button id="pop">右侧出</button>
+		<button id="sort-btn">排序</button>
+		<ul>
+			
+		</ul>
+	</body>
+	<script type="text/javascript">
+	    //先获取data数组
+	    var data =[];
+	    var li =document.getElementsByTagName("li");
+	    for(var i=0;i<li.length;i++){
+	    	data.push(li[i].innerHTML);
+	    }
+	    //左侧入效果 unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+	    var leftIn = document.getElementById("unShift");
+	    var rightIn = document.getElementById("push");
+	    var leftOut = document.getElementById("shift");
+	    var rightOut = document.getElementById("pop");
+	    var sortBtn = document.getElementById("sort-btn");
+	    
+	    //绑定点击效果
+	    leftIn.addEventListener('click',function(){
+	    	var num = document.getElementById("num").value;
+	    	if(10<=num&&num<=100){
+	    		if(data.length < 60){
+	    			data.unshift(num);
+	    		}else{
+    				alert("输入的数值已达上限60");
+	    		}
+	    	}else{
+	    		alert("输入的数值不在10-100，请修改");
+	    	}
+	    	showLi(data);
+	    });
+	    rightIn.addEventListener('click',function(){
+	    	var num = document.getElementById("num").value;
+	    	if(10<=num&&num<=100){
+	    		if (data.length < 60) {
+	    			data.push(num);
+	    		}else{
+	    			alert("输入的数值已达上限60");
+	    		}
+	    	}
+	    	else{
+	    		alert("输入的数值不在10-100，请修改");
+	    	}
+	    	showLi(data);
+	    	
+	    });
+	    leftOut.addEventListener('click',function(){
+	    	data.shift();
+	    	showLi(data);	    	
+	    });
+	    rightOut.addEventListener('click',function(){
+	    	data.pop();
+	    	showLi(data);	    	
+	    });
+	    sortBtn.addEventListener('click',function(){
+	    	bubbleSort(data);
+	    });
+
+	    
+	    //显示效果
+	    function showLi(data){
+	    	
+	    	removeAllLi();
+	    	var newDom = document.createDocumentFragment();
+	    	for(var j=0;j<data.length;j++){
+	    		var liCreate = document.createElement("li");
+	    		//数组表达方式变成height
+	    		liCreate.style.height = data[j]*2+"px";
+	    		newDom.append(liCreate);
+	    	}
+	    	document.getElementsByTagName("ul")[0].appendChild(newDom);
+	    }
+	    function removeAllLi(){
+	    	var ul = document.getElementsByTagName("ul")[0];
+	    	ul.innerHTML = '';
+	    }
+
+	    function bubbleSort(arr){
+	    	var len = arr.length,i=0,j=0;
+	    	var timer = setInterval(function(){
+                if(i<len){
+                	if(j<len-1){
+                		if(arr[j]>arr[j+1]){
+                			var temp = arr[j+1];
+                			arr[j+1] = arr[j];
+                			arr[j] = temp;
+                			showLi(arr);
+                		}
+                		j++;
+                	}else{
+                        j = 0;
+                        i++;
+                	}
+                }else{
+                    clearInterval(timer);
+                }
+	    	},500);
+	    	
+	    	// return arr;
+	    }
+		 
+	</script>
+</html>

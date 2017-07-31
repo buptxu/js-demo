@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.box{
+			display: flex;
+			justify-content: center;
+		}
+		.root{
+			display: flex;
+			flex-direction: row;
+			border: 1px solid rgb(0,0,0);
+			width: 1400px;
+			height: 200px;
+			justify-content: center;
+			align-items: center;
+		}
+		.child-1{
+			border: 1px solid rgb(0,0,0);
+			display: flex;
+			flex-direction:row ;
+			justify-content: center;
+			align-items: center;
+			/*width: 380px;*/
+			height: 180px;
+			margin: 10px;	
+		}
+		.child-2{
+			border: 1px solid rgb(0,0,0);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*width: 160px;*/
+			height: 140px;
+			margin: 10px;
+		}
+		.child-3{
+			border: 1px solid rgb(0,0,0);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/*width: 60px;*/
+			height: 100px;
+			margin: 10px;
+		}
+		.child-4{
+			border: 1px solid rgb(0,0,0);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 60px;
+			margin: 10px;
+		}
+		.btns{
+			display: flex;
+			justify-content: center;
+		}
+		.btns button{
+			margin: 10px;
+		}
+		.search-div,.input-div{
+			display: flex;
+			justify-content: center;
+			margin: 10px;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<div class="root" id="Super">
+				Super
+				<div class="child-1" id="Car" >
+					Car
+					<div class="child-2" id="Apple">
+						Apple
+						<div class="child-3"id="Peor">
+							Peor
+						</div>
+						<div class="child-3" id="Pig">
+							Pig
+						</div>
+						<div class="child-3"id="Cola">
+							Cola
+						</div>
+						<div class="child-3"id="Soccer">
+							Soccer
+						</div>
+					</div>
+					<div class="child-2"id="Phone">
+						Phone
+					</div>
+					<div class="child-2"id="Web">
+						Web
+						<div class="child-3"id="Book">
+							Book
+						</div><div class="child-3"id="School">
+							School
+						</div>
+					</div>
+					
+				</div>
+				<div class="child-1"id="Note">
+					Note
+					<div class="child-2"id="Human">
+						Human
+						<div class="child-3"id="Code">
+							Code
+						</div>
+						<div class="child-3"id="Operote">
+							Operote
+						</div>
+						<div class="child-3"id="Man">
+							Man
+						</div>
+					</div>
+					<div class="child-2"id="Program">
+						Program
+						<div class="child-3"id="Bement">
+						    Bement
+						    <div class="child-4"id=" Cat">
+						        Cat
+						    </div>
+						</div>
+						<div class="child-3"id="Glass">
+						    Glass
+						</div>
+					</div>
+				</div>
+				<div class="child-1"id="Fish">
+					Fish
+				</div>
+			</div>	
+		</div>
+		<div class="btns">
+			<button id="pre-order">前序</button>
+			<!--<button id="in-order">中序</button>-->
+			<button id="post-order">后序</button>
+			<button id="del">删除</button>
+		</div>
+		<div class="search-div">
+			<textarea id="txt" style="width: 200px;height: 50px;"></textarea>
+			<button id="search">查询</button>
+		</div>
+		<div class="input-div">
+			<textarea id="txt-2" style="width: 200px;height: 50px;"></textarea>
+			<button id="input-add">增加</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+	"use strict";
+		var pre = document.getElementById("pre-order");
+		var post = document.getElementById("post-order");
+		var root = document.getElementsByClassName("root")[0];
+		var txt=document.getElementById("txt");
+		var search = document.getElementById("search");
+		var del = document.getElementById("del");
+		var txt2 = document.getElementById("txt-2");
+		var add = document.getElementById("input-add");
+		var div = document.getElementsByTagName("div");
+		var data = [];
+		var delDate = [];
+		var head,timer;
+		//前序遍历
+		function preOrder(node){
+			if(node !=null){
+				data.push(node);
+				for(let i = 0;i<node.children.length;i++){
+					 preOrder(node.children[i]);
+				}
+			}
+		}
+		//后序遍历
+		function postOrder(node){
+			if(node !=null){
+				for(let i = 0;i<node.children.length;i++){
+					 preOrder(node.children[i]);
+				}
+				data.push(node);
+			}
+		}
+		//重置
+		function clear(arr){
+			if(arr.length>0){
+				head.style.backgroundColor = "#fff";
+				arr = [];
+				clearTimeout(timer);
+			}
+		}
+		//显示
+		function show(){
+			head = data.shift();
+			if(head){
+				head.style.backgroundColor = "#ff0000";
+				timer = setTimeout(function(){
+					head.style.backgroundColor = "#fff";
+					show();
+				},500);
+			}
+		}
+		//查询
+		function showSearch(){
+			head = data.shift();
+			if(head){
+				head.style.backgroundColor = "#ff0000";
+				timer = setTimeout(function(){
+					head.style.backgroundColor = "#fff";
+					if(head.id === txt.value){
+						head.style.border="thick solid #FF0000";						
+					}
+					showSearch();
+				},500);
+			}
+		}
+		//点击获取节点，修改颜色,对应节点放入数组中
+		function handClick(e){
+			var get = e.target||Event.srcElement;
+			console.log(typeof get);
+			delDate.push(get);
+			get.style.border="thick solid #00FF00";
+		}
+		function delNode(){
+			head = delDate.shift();
+			if(head){
+				head.parentNode.removeChild(head);
+				delNode();
+			}
+		}
+		function addNode(){
+			head = delDate.shift();
+			console.log(delDate);
+			if(head){
+				var addnode = document.createElement("div");
+				var nodetxt = document.createTextNode(txt2.value);
+				addnode.appendChild(nodetxt);
+				var childs = head.childNodes;
+				var classname = childs[1].className;
+				addnode.setAttribute("class",classname);
+				addnode.setAttribute("id",txt2.value);
+				//插入在节点的最后一个位置
+				head.appendChild(addnode);
+			}
+		}
+		//在root的div内容下点击可以进行获取行为
+		root.addEventListener("click",handClick);
+		del.addEventListener("click",delNode);
+		pre.addEventListener("click",function(){
+			clear(data);
+			preOrder(root);
+			show();	
+		});
+		post.addEventListener("click",function(){
+			clear(data);
+			postOrder(root);
+			show();
+		});
+		//搜索
+		search.addEventListener("click",function(){
+			clear(data);
+			preOrder(root);
+			showSearch();
+		});
+		//增加
+		add.addEventListener("click",addNode);
+	</script>
+</html>

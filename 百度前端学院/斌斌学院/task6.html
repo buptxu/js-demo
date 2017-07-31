@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			padding: 10px;
+		}
+		ul li{
+			list-style-type: none;
+			width: 40px;
+			height: 40px;
+			background-color: red;
+			color: white;
+			text-align: center;
+			line-height: 40px;
+			font-weight: bold;
+			float: left;
+			margin: 5px;
+		}
+	</style>
+	<body>
+		<textarea id="num" name="num" rows="" cols=""></textarea>
+		<button id="unShift">左侧入</button>
+		<button id="push">右侧入</button>
+		<button id="shift">左侧出</button>
+		<button id="pop">右侧出</button>
+		<textarea id="searchText" rows="" cols=""></textarea>
+		<button id="search">查询</button>
+		<ul id="demo">
+			<li>10</li>
+			<li>3</li>
+			<li>7</li>
+			<li>12</li>
+			<li>11</li>
+			<li>30</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		"use strict";
+	    //先获取data数组
+	    var data =[];
+	    var li =document.getElementsByTagName("li");
+	    for(var i=0;i<li.length;i++){
+	    	data.push(li[i].innerHTML);
+	    }
+	    //效果主要使用数组的pop(),push(),shift()及unshift()方法。
+	    var leftIn = document.getElementById("unShift");
+	    var rightIn = document.getElementById("push");
+	    var leftOut = document.getElementById("shift");
+	    var rightOut = document.getElementById("pop");
+	    var ul = document.getElementsByTagName("ul")[0];
+	    var searchText = document.getElementById("searchText"); 
+	    var search = document.getElementById("search");
+	    
+	    
+	    
+	    // function Del(){
+	    // 	for(var i = 0;i<li.length;i++){
+	    // 	    li[i].index = i;
+	    // 	    li[i].onclick = function(){
+	    // 	        data.splice(this.index,1);
+	    // 	        showLi(data);
+	    //         }
+	     
+	    //     }
+	    // }
+	    //显示效果
+	    function showLi(data){
+	    	removeAllLi();
+	    	var newDom = document.createDocumentFragment();
+	    	for(var j=0;j<data.length;j++){
+	    		var liCreate = document.createElement("li");
+	    		liCreate.innerHTML = data[j];
+	    		newDom.append(liCreate);
+	    	}
+	    	document.getElementsByTagName("ul")[0].appendChild(newDom);
+	    }
+	    function removeAllLi(){
+	    	var rootNode = document.getElementById("demo");
+	    	rootNode.innerHTML = '';
+	    }
+	    leftIn.onclick = function(){
+	    	var num = document.getElementById("num").value;
+	    	var arr=[];
+	    	arr = num.split(/[,\s、\r]/);
+            for(var i = 0;i<arr.length;i++){
+            	data.unshift(arr[i]);
+            }	    	
+	    	showLi(data);
+	    }
+	    rightIn.onclick = function(){
+	    	var num = document.getElementById("num").value;
+	    	var arr=[];
+	    	arr = num.split(/[,\s、\r]/);
+            for(var i = 0;i<arr.length;i++){
+            	data.push(arr[i]);
+            }
+	    	showLi(data);
+	    }
+	    leftOut.onclick = function(){
+	    	data.shift();
+	    	showLi(data);	
+	    }
+	    rightOut.onclick = function(){
+	    	data.pop();
+	    	showLi(data);	
+	    }
+	    
+	    ul.onclick = function(e){
+	    	// Del();
+	    	e.target.remove();
+	    }
+	    search.addEventListener("click",function(){
+	    	var text = searchText.value;
+	    	for(var i= 0;i<data.length;i++){
+	    		if(data[i].indexOf(text)>-1){
+	    			li[i].style.backgroundColor = "yellow";
+	    		}
+	    	}
+	    });
+	    
+	   
+		 
+	</script>
+</html>

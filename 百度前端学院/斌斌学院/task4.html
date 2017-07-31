@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			padding: 10px;
+		}
+		ul li{
+			list-style-type: none;
+			width: 40px;
+			height: 40px;
+			background-color: red;
+			color: white;
+			text-align: center;
+			line-height: 40px;
+			font-weight: bold;
+			float: left;
+			margin: 5px;
+		}
+	</style>
+	<body>
+		<input type="number" name="num" id="num" value="" />
+		<button id="unShift">左侧入</button>
+		<button id="push">右侧入</button>
+		<button id="shift">左侧出</button>
+		<button id="pop">右侧出</button>
+		<ul>
+			<li>10</li>
+			<li>3</li>
+			<li>7</li>
+			<li>12</li>
+			<li>11</li>
+			<li>30</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+	    //先获取data数组
+	    var data =[];
+	    var li =document.getElementsByTagName("li");
+	    for(var i = 0,len = li.length;i < len;i++){
+	    	data.push(li[i].innerHTML);
+	    }
+	    //左侧入效果 unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+	    var leftIn = document.getElementById("unShift");
+	    var rightIn = document.getElementById("push");
+	    var leftOut = document.getElementById("shift");
+	    var rightOut = document.getElementById("pop");
+	    var ul = document.getElementsByTagName("ul")[0];
+	    var put =  document.getElementById("num");
+	    
+	    //显示效果
+	    function showLi(data){
+	    	removeAllLi();
+	    	var newDom = document.createDocumentFragment();
+	    	for(var j=0,len = data.length;j<len;j++){
+	    		var liCreate = document.createElement("li");
+	    		liCreate.innerHTML = data[j];
+	    		newDom.append(liCreate);
+	    	}
+	    	ul.appendChild(newDom);
+	    }
+	    function removeAllLi(){
+	    	var _li = ul.children;
+	    	for(var i=_li.length-1;i>=0;i--){
+	    		ul.removeChild(_li[i]);
+	    	}
+	    }
+	    leftIn.onclick = function(){
+	    	var num = put.value;
+	    	data.unshift(num);
+	    	put.value = '';
+	    	showLi(data);
+	    }
+	    rightIn.onclick = function(){
+	    	var num = put.value;
+	    	data.push(num);
+	    	put.value = '';
+	    	showLi(data);
+	    }
+	    leftOut.onclick = function(){
+	    	data.shift();
+	    	showLi(data);	
+	    }
+	    rightOut.onclick = function(){
+	    	data.pop();
+	    	showLi(data);	
+	    }
+	    
+	    ul.onclick = function(e){
+	    	e.target.remove();
+	    }
+	   
+		 
+	</script>
+</html>
