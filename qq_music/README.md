@@ -1,6 +1,6 @@
-# 一个假的qq音乐Vue SPA qq_music
+#qq音乐Vue SPA qq_music
 
-> 我可能做了一个假的qq音乐demo， 本demo参考`https://y.qq.com`开发的，难怪跟网上其他人的案例界面不一样。。。Orz
+>  本demo参考`https://y.qq.com`开发的
 
 ## Build Setup
 
@@ -37,36 +37,16 @@ npm run build --report
 优化 `localstorage` 可存／取数组类型（通过序列化和反序列化）
 
 
-> 个人闲暇时间里做的，希望跟大家共同进步————持续更新／优化
-
-## 目前存在的问题
-
-组件划分还不够精细，这个需要更多经验和对产品的理解
-
-代码优化还有待加强
-
-数据请求可以用api.js统一管理，组件只关心参数和返回值即可
-
-action管理可以通过dispatch 或commit触发获取数据
-
 ## 优点
 
 用到了比较新且全面的 `Vue` 相关的技术栈，
 
-1. "vue": "^2.1.10",
-2. "vue-awesome-swiper": "^2.3.2",
-3. "vue-resource": "^1.2.0",
-4. "vue-router": "^2.2.0",
-5. "vuex": "^2.1.2"
+1. vue
+2. vue-awesome-swiper
+3. vue-resource
+4. vue-router
+5. vuex
 
-代码格式比较整齐（换过一次IDE，可能个别文件缩紧不统一，见到时候会调整回来）
-
-
-## 案例截图（gif图片放到线上有点卡，如果新看的更流畅可以吧这个图片下载到你本地打开）
-
-![image](https://github.com/chengjun2014/qq_music/blob/master/playing.png)
-
-![image](https://github.com/chengjun2014/qq_music/blob/master/music.gif)
 
 
 
