@@ -1,0 +1,72 @@
+<template>
+	<div>
+		<div class="head f-cb">
+			<router-link to="/recommend" :class="{'active' :curTab == 0}"><span @click="changeChannel(0)">推荐</span></router-link>
+			<router-link to="/rank" :class="{'active' :curTab == 1}"><span @click="changeChannel(1)">排行榜</span></router-link>
+			<router-link :to="{name: 'Search'}" :class="{'active' :curTab == 2}"><span @click="changeChannel(2)">搜索</span></router-link>
+		</div>
+		<div class="head-back"></div>
+	</div>
+</template>
+<script>
+	import router from '../../router'
+	import store from '../../vuex/store'
+
+	export default {
+		data: function() {
+			return {
+				curTab: store.getters.getTab
+			}
+		},
+		methods: {
+			changeChannel (arg) {
+				store.commit('changeTab', arg);
+			}
+		}
+	}
+</script>
+
+<style lang="less">
+	.head-back{
+		display:block;
+		height: 2.25rem;
+	}
+	.head {
+		width: 100%;
+		background-color: #e5ecec;
+		height: 2.25rem;
+		line-height: 2.25rem;
+		font-size: 0.8rem;
+		color: #fff;
+		text-align: center;		
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		position: fixed;
+    	z-index: 99;
+		.active {
+			position: relative;
+			color: #31c27c;
+			&:after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background-color: #31c27c;
+			}
+		}
+		a {
+			-webkit-box-flex: 1;
+			-webkit-flex: 1;
+			flex: 1;
+			width: 0;
+			color: rgba(0,0,0,.6);
+			span {
+				display: block;
+			}
+		}
+		
+	}
+</style>
