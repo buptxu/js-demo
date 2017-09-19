@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>img-lazyload</title>
+    <style>
+        .parent{
+            width: 400px;
+            margin: 1000px auto;
+        }
+        img {
+            border: 1px solid black;
+            width: 300px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <img class="lazyload" src="" data-src="http://n.7k7kimg.cn/2014/1209/1418109581623.gif">
+        <img class="lazyload" src="" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505814541559&di=e9e8b428179d25f746ba3ebad92c4471&imgtype=0&src=http%3A%2F%2Fpic29.photophoto.cn%2F20131007%2F0036036856450912_b.jpg">
+        <img class="lazyload" src="" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505814541559&di=40d65be283788a38a5fb805d4bfaba4f&imgtype=0&src=http%3A%2F%2Fwww.zhlzw.com%2FUploadFiles%2FArticle_UploadFiles%2F201204%2F20120412123912727.jpg">
+        <img class="lazyload" src="" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1506409257&di=5ba156128dcf13656f0b742aebde1ac3&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.zhlzw.com%2FUploadFiles%2FArticle_UploadFiles%2F201204%2F20120412123929822.jpg">
+        <img class="lazyload" src="" data-src="http://img002.21cnimg.com/photos/album/20150702/m600/2D79154370E073A2BA3CD4D07868861D.jpeg">
+        <img class="lazyload" src="" data-src="http://img.pconline.com.cn/images/bbs4/200912/23/1261547575022.jpg">
+        <img class="lazyload" src="" data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1497274158195&di=2b6bc6b871d4f7f267169dfcfb727f84&imgtype=0&src=http%3A%2F%2Fcyjctrip.qiniudn.com%2F106357%2F1395933091608p18k21ek6kvj1gv2ta910kn1002m.jpg">
+    </div>
+
+
+<script type="text/javascript" src="lazyload.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var _ImageLazyload = new ImageLazyload();
+    };
+</script>
+</body>
+</html>
